@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   Token warna
+   Peran, bukan nama buah:
+   paper / paper-2 / paper-3 = latar bertingkat (halaman, kartu, kontrol)
+   ink / ink-2 / ink-3        = teks utama, teks pendukung, teks meta
+   accent                     = satu aksen, dipakai hemat
+   pos / neg                  = uang masuk dan uang keluar
+   Semua pasangan teks di bawah ini sudah diukur terhadap latarnya.
+   ========================================================= */
+:root {
+  color-scheme: dark;
+
+  --paper: #0b0e14;
+  --paper-2: #11151d;
+  --paper-3: #182029;
+
+  --line: #232d3c;
+  --line-strong: #5a6b84;
+  --line-soft: rgba(255, 255, 255, 0.1);
+
+  --ink: #eef2f8;
+  --ink-2: #c6cfdc;
+  --ink-3: #9aa7ba;
+
+  --accent: #6aa9ff;
+  --accent-ink: #0b0e14;
+  --accent-soft: rgba(106, 169, 255, 0.16);
+
+  --pos: #8ce99a;
+  --pos-soft: rgba(140, 233, 154, 0.12);
+
+  --neg: #ffb199;
+  --neg-soft: rgba(255, 177, 153, 0.12);
+
+  --focus: #cfe0ff;
+}
+
+@layer base {
+  html {
+    background: var(--paper);
+    /* Supaya kontrol native (date picker, dropdown) ikut gelap, bukan putih. */
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Satu aturan fokus untuk seluruh aplikasi, jadi tidak ada lagi
+     outline-none tanpa pengganti. */
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  :where(button, [role='button'], summary, select, label[for]):not(:disabled) {
+    cursor: pointer;
+  }
+
+  :where(button, input, select, textarea):disabled {
+    cursor: not-allowed;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-card border border-line bg-paper-2;
+  }
+
+  /* Garis putus-putus: motif buku catatan, dipakai untuk memisahkan baris. */
+  .rule {
+    @apply border-b border-dashed;
+    border-color: var(--line-soft);
+  }
+
+  /* Judul bagian: Caveat dengan garis bawah putus-putus.
+     Satu gestur yang diulang di semua halaman, jadi terasa satu buku. */
+  .section-head {
+    @apply border-b border-dashed pb-1 font-hand text-[26px] leading-none text-ink;
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+
+  .label {
+    @apply text-[11px] font-medium leading-none text-ink-3;
+  }
+
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-field px-4 text-sm font-medium transition-colors duration-150;
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-field bg-accent px-4 text-sm font-semibold text-accent-ink transition-colors duration-150 hover:bg-[#8bbaff] active:bg-[#5a99ee];
+  }
+
+  .btn-quiet {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-field border border-line-strong bg-paper-3 px-4 text-sm font-medium text-ink-2 transition-colors duration-150 hover:border-[#6b7d97] hover:text-ink active:bg-paper-2;
+  }
+
+  .btn-danger {
+    @apply inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-field border px-4 text-sm font-medium transition-colors duration-150;
+    border-color: var(--neg);
+    background: var(--neg-soft);
+    color: var(--neg);
+  }
+
+  .field {
+    @apply min-h-11 w-full rounded-field border border-line-strong bg-paper-3 px-4 text-sm text-ink transition-colors duration-150 placeholder:text-ink-3 hover:border-[#6b7d97];
+  }
+
+  /* Baris daftar: satu kontrol penuh lebar, bukan div yang diklik. */
+  .row {
+    @apply flex w-full items-center gap-3 py-3 text-left;
+  }
+
+  .row-sep {
+    @apply border-b border-dashed;
+    border-color: var(--line-soft);
+  }
+
+  .icon-tile {
+    @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-field;
+  }
+}
+
+@layer utilities {
+  .tap {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Dialog: dim + panel. Panelnya sendiri yang jadi dialog, bukan pembungkus. */
+dialog::backdrop {
+  background: rgba(4, 6, 10, 0.68);
+}
+
+dialog[open] {
+  animation: sheet-in 160ms ease-out;
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0.6;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
