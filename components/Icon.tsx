@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, CSSProperties } from 'react';
 
 const GLYPHS: Record<string, ReactNode> = {
   home: (
@@ -250,7 +250,6 @@ const GLYPHS: Record<string, ReactNode> = {
       <path d="M12 16.2h.01" strokeWidth="2.4" />
     </>
   ),
-  // IKON BARU KITA TAMBAHIN DI SINI (BIAR MUNCUL)
   coffee: (
     <>
       <path d="M5 7h11v6.5a3.5 3.5 0 0 1-3.5 3.5H8.5A3.5 3.5 0 0 1 5 13.5z" />
@@ -300,13 +299,13 @@ export type IconProps = {
   size?: number;
   strokeWidth?: number;
   className?: string;
+  style?: CSSProperties; // <--- DITAMBAHIN DI SINI
 };
 
-export default function Icon({ name, size = 20, strokeWidth = 1.8, className }: IconProps) {
+export default function Icon({ name, size = 20, strokeWidth = 1.8, className, style }: IconProps) {
   const raw = name.replace(/^ti-/, '');
   const key = ALIASES[raw] ?? raw;
 
-  // Ambil dari GLYPHS, kalau nggak ada pakai 'tag'
   const glyph = GLYPHS[key] ?? GLYPHS['tag'];
 
   return (
@@ -322,6 +321,7 @@ export default function Icon({ name, size = 20, strokeWidth = 1.8, className }: 
       aria-hidden="true"
       focusable="false"
       className={className}
+      style={style} // <--- DITAMBAHIN DI SINI
     >
       {glyph}
     </svg>
