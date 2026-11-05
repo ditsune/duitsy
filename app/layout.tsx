@@ -9,7 +9,7 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600', '700
 
 export const metadata: Metadata = {
   title: {
-    default: 'Duitsy, Catatan Keuangan',
+    default: 'Duitsy',
     template: '%s · Duitsy',
   },
   description: 'Catatan pengeluaran dan pemasukan pribadi.',

@@ -141,13 +141,12 @@ export default function TransactionSheet({ categories, accounts, initial, onClos
                   type="button"
                   aria-pressed={active}
                   onClick={() => setDraft({ ...draft, type, category_id: null })}
-                  className={`flex min-h-11 items-center gap-2 rounded-chip border px-3.5 text-xs font-medium transition-colors duration-150 ${
-                    active
+                  className={`flex min-h-11 items-center gap-2 rounded-chip border px-3.5 text-xs font-medium transition-colors duration-150 ${active
                       ? type === 'exp'
                         ? 'border-neg bg-neg-soft text-neg'
                         : 'border-pos bg-pos-soft text-pos'
                       : 'border-line-strong bg-paper-3 text-ink-3 hover:text-ink-2'
-                  }`}
+                    }`}
                 >
                   <Icon name={type === 'exp' ? 'shopping-cart' : 'cash'} size={16} />
                   {label}
@@ -207,7 +206,7 @@ export default function TransactionSheet({ categories, accounts, initial, onClos
 
             <div className="rule flex items-center gap-3 px-4 py-1.5">
               <label htmlFor={accountId} className="w-24 shrink-0 text-sm text-ink-2">
-                Akun
+                Wallet
               </label>
               {hasAccounts ? (
                 <select
@@ -224,7 +223,7 @@ export default function TransactionSheet({ categories, accounts, initial, onClos
                 </select>
               ) : (
                 <Link href="/dashboard/akun" className="flex min-h-11 flex-1 items-center justify-end text-sm font-medium text-accent">
-                  Buat akun dulu
+                  Buat wallet dulu
                 </Link>
               )}
             </div>
@@ -294,9 +293,8 @@ export default function TransactionSheet({ categories, accounts, initial, onClos
                           setDraft({ ...draft, category_id: category.id });
                           setPickerOpen(false);
                         }}
-                        className={`flex min-h-[74px] flex-col items-center justify-center gap-1.5 rounded-card border px-1.5 py-2.5 transition-colors duration-150 ${
-                          active ? 'border-accent bg-paper-2' : 'border-line-strong bg-paper-3 hover:border-[#6b7d97]'
-                        }`}
+                        className={`flex min-h-[74px] flex-col items-center justify-center gap-1.5 rounded-card border px-1.5 py-2.5 transition-colors duration-150 ${active ? 'border-accent bg-paper-2' : 'border-line-strong bg-paper-3 hover:border-[#6b7d97]'
+                          }`}
                       >
                         <span className="icon-tile" style={{ background: colors.bg, color: colors.fg }}>
                           <Icon name={category.icon} size={18} />
