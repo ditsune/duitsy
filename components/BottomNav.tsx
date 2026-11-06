@@ -8,7 +8,7 @@ const ITEMS = [
   { href: '/dashboard', icon: 'home', label: 'Beranda' },
   { href: '/dashboard/wawasan', icon: 'chart-donut', label: 'Wawasan' },
   { href: '/dashboard/transaksi', icon: 'list', label: 'Transaksi' },
-  { href: '/dashboard/akun', icon: 'building-bank', label: 'Akun' },
+  { href: '/dashboard/akun', icon: 'building-bank', label: 'Wallet' },
 ];
 
 export default function BottomNav({ onAdd }: { onAdd: () => void }) {
@@ -26,9 +26,8 @@ export default function BottomNav({ onAdd }: { onAdd: () => void }) {
             key={item.href}
             href={item.href}
             aria-current={active ? 'page' : undefined}
-            className={`flex min-h-[52px] w-[68px] flex-col items-center justify-center gap-1 rounded-field text-[11px] font-medium transition-colors duration-150 ${
-              active ? 'text-accent' : 'text-ink-3 hover:text-ink-2'
-            }`}
+            className={`flex min-h-[52px] w-[68px] flex-col items-center justify-center gap-1 rounded-field text-[11px] font-medium transition-colors duration-150 ${active ? 'text-accent' : 'text-ink-3 hover:text-ink-2'
+              }`}
           >
             <Icon name={item.icon} size={21} />
             <span>{item.label}</span>
